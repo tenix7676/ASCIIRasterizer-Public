@@ -476,6 +476,7 @@ void openMenuAndRunOption()
 
 int main()
 {
+	Screen::EnableVTMode();
 	openMenuAndRunOption();
 }
 
