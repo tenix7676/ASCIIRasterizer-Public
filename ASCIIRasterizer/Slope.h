@@ -24,8 +24,8 @@ enum SlopeEnum : short
 	SLOPE_3_2,
 	//wider and higher slopes, edit accordingly to the widest and highest slopes, with a number +1
 	//so if the widest slope is SLOPE_1_5 then SLOPE_1_GREATER_THAN_6 ends in a 6
-	SLOPE_WIDER, //the slope is WIDER than WIDE
-	SLOPE_HIGHER, //the slope is HIGHER than HIGH
+	SLOPE_WIDER, //the case where slope is WIDER than WIDE
+	SLOPE_HIGHER, //the case where slope is HIGHER than HIGH
 
 	MAX_SLOPE_FRACTIONS,
 	//Special slopes, don't touch these
