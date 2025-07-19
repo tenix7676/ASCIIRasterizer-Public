@@ -21,7 +21,7 @@ using namespace std;
 //Camera and viewport
 Vector_3d camera{ 0, 0, 0 };
 double viewport_distance{ 2.2 };
-Vector_3d camera_direction{ 1, 0, 0 };
+//The camera is looking in the positive x direction
 
 const int TICKS_PER_SECOND = 1'000'000; //1 sec is 10^6 microseconds (ticks), measured with duration_cast<microseconds>
 const int FPS = 60;
@@ -92,7 +92,7 @@ void playAnimation1()
 			return;
 
 		Screen::reset();
-		Rasterizer::drawWireframe(cube.getWiresToDraw(), camera, camera_direction, viewport_distance);
+		Rasterizer::drawWireframe(cube.getWiresToDraw(), camera, viewport_distance);
 
 		cube.setAngleZ(anglez * numbers::pi / 180.0);
 
@@ -143,7 +143,7 @@ void playAnimation2()
 			return;
 
 		Screen::reset();
-		Rasterizer::drawWireframe(cube.getWiresToDraw(), camera, camera_direction, viewport_distance);
+		Rasterizer::drawWireframe(cube.getWiresToDraw(), camera, viewport_distance);
 
 		cube.setAngleZ(anglez * numbers::pi / 180.0);
 
@@ -195,7 +195,7 @@ void playAnimation3()
 			return;
 
 		Screen::reset();
-		Rasterizer::drawWireframe(cube.getWiresToDraw(), camera, camera_direction, viewport_distance);
+		Rasterizer::drawWireframe(cube.getWiresToDraw(), camera, viewport_distance);
 
 		cube.setAngleZ(anglez * numbers::pi / 180.0);
 
@@ -259,7 +259,7 @@ void turnWireframeWASD(Wireframe& wireframe)
 		//Show the wireframe
 		Screen::reset();
 		writeEnter();
-		Rasterizer::drawWireframe(wireframe.getWiresToDraw(), camera, camera_direction, viewport_distance);
+		Rasterizer::drawWireframe(wireframe.getWiresToDraw(), camera, viewport_distance);
 		Screen::print();
 
 		auto end_time = high_resolution_clock::now();
@@ -284,7 +284,7 @@ void turnWireframeX(Wireframe& wireframe)
 			return;
 
 		Screen::reset();
-		Rasterizer::drawWireframe(wireframe.getWiresToDraw(), camera, camera_direction, viewport_distance);
+		Rasterizer::drawWireframe(wireframe.getWiresToDraw(), camera, viewport_distance);
 		Screen::print();
 
 		writeEnter();
@@ -306,7 +306,7 @@ void turnWireframeY(Wireframe& wireframe)
 			return;
 
 		Screen::reset();
-		Rasterizer::drawWireframe(wireframe.getWiresToDraw(), camera, camera_direction, viewport_distance);
+		Rasterizer::drawWireframe(wireframe.getWiresToDraw(), camera, viewport_distance);
 		Screen::print();
 
 		writeEnter();
@@ -328,7 +328,7 @@ void turnWireframeZ(Wireframe& wireframe)
 			return;
 
 		Screen::reset();
-		Rasterizer::drawWireframe(wireframe.getWiresToDraw(), camera, camera_direction, viewport_distance);
+		Rasterizer::drawWireframe(wireframe.getWiresToDraw(), camera, viewport_distance);
 		Screen::print();
 
 		writeEnter();
@@ -339,8 +339,8 @@ void turnWireframeZ(Wireframe& wireframe)
 void changeWireframePos(Wireframe& wireframe)
 {
 	double x, y, z;
-	Input::in3Double("Set wireframe pos [x, y, z]: ", x, y, z);
-
+	Vector_3d current_pos = wireframe.getPos();
+	Input::in3Double("Set wireframe pos, currently (" + to_string(current_pos.x) + ", " + to_string(current_pos.y) + ", " + to_string(current_pos.z) + ") : ", x, y, z);
 	wireframe.setPos({ x,y,z });
 
 	while(true)
@@ -351,15 +351,15 @@ void changeWireframePos(Wireframe& wireframe)
 
 		Screen::reset();
 		writeEnter();
-		Rasterizer::drawWireframe(wireframe.getWiresToDraw(), camera, camera_direction, viewport_distance);
+		Rasterizer::drawWireframe(wireframe.getWiresToDraw(), camera, viewport_distance);
 		Screen::print();
 	}
 }
 
-void changeCameraPos(Wireframe& wireframe)
+void changeCameraPos(Wireframe& wireframe, Vector_3d& camera)
 {
 	double x, y, z;
-	Input::in3Double("Set wireframe pos [x, y, z]: ", x, y, z);
+	Input::in3Double("Set camera pos, currently (" + to_string(camera.x) + ", " + to_string(camera.y) + ", " + to_string(camera.z) + ") : ", x, y, z);
 
 	camera = { x,y,z };
 
@@ -371,7 +371,7 @@ void changeCameraPos(Wireframe& wireframe)
 
 		Screen::reset();
 		writeEnter();
-		Rasterizer::drawWireframe(wireframe.getWiresToDraw(), camera, camera_direction, viewport_distance);
+		Rasterizer::drawWireframe(wireframe.getWiresToDraw(), camera, viewport_distance);
 		Screen::print();
 	}
 }
@@ -400,7 +400,7 @@ void playAnimation(Wireframe& wireframe)
 			return;
 
 		Screen::reset();
-		Rasterizer::drawWireframe(wireframe.getWiresToDraw(), camera, camera_direction, viewport_distance);
+		Rasterizer::drawWireframe(wireframe.getWiresToDraw(), camera, viewport_distance);
 
 		wireframe.setAngleZ(starting_angle_z + anglez * numbers::pi / 180.0);
 
@@ -464,7 +464,7 @@ void openMenuAndRunOption()
 			changeWireframePos(cube);
 			break;
 		case CAMERA_POS:
-			changeCameraPos(cube);
+			changeCameraPos(cube, camera);
 			break;
 		case PLAY_ANIM:
 			playAnimation(cube);

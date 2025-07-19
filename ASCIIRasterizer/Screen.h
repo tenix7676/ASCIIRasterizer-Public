@@ -19,4 +19,5 @@ namespace Screen
 	void writeStringOneLineCentered(int x0, int y0, std::string s);
 	void writeStringOneLineHighlighted(int x0, int y0, std::string s);
 	void writeStringOneLineCenteredHighlighted(int x0, int y0, std::string s);
+	void warningTooClose();
 }

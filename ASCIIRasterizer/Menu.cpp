@@ -74,25 +74,29 @@ namespace Menu
 	MenuOptions openMenu()
 	{
 		int option_cursor_positon = 0;
-		int menu_width = Screen::SCREEN_WIDTH * 3 / 4; //75% of screen 
-		int menu_height = Screen::SCREEN_HEIGHT * 3 / 4;
+		int menu_width = Screen::SCREEN_WIDTH * 4 / 4; //100% of screen 
+		int menu_height = Screen::SCREEN_HEIGHT * 4 / 4;
 	
 		while(true)
 		{
 			Screen::reset();
-			drawMenu(Screen::SCREEN_WIDTH / 2 - menu_width / 2, 1, menu_width, menu_height, option_cursor_positon);
+			drawMenu(Screen::SCREEN_WIDTH / 2 - menu_width / 2, 0, menu_width, menu_height, option_cursor_positon);
 			Screen::print();
 
 			Input::updateKeyboard();
 			if(Input::isDown(S))
 			{
-				if(option_cursor_positon < MAX_MENUOPTIONS - 1)
+				if (option_cursor_positon < MAX_MENUOPTIONS - 1)
 					++option_cursor_positon;
+				else
+					option_cursor_positon = 0;
 			}
 			if(Input::isDown(W))
 			{
-				if(option_cursor_positon > 0)
+				if (option_cursor_positon > 0)
 					--option_cursor_positon;
+				else
+					option_cursor_positon = MAX_MENUOPTIONS - 1;
 			}
 
 			if(Input::isDown(ENTER))
@@ -103,25 +107,29 @@ namespace Menu
 	SubMenuOptions openSubMenu()
 	{
 		int option_cursor_positon = 0;
-		int menu_width = Screen::SCREEN_WIDTH * 3 / 4; //75% of screen 
-		int menu_height = Screen::SCREEN_HEIGHT * 3 / 4;
+		int menu_width = Screen::SCREEN_WIDTH * 4 / 4; //100% of screen 
+		int menu_height = Screen::SCREEN_HEIGHT * 4 / 4;
 
 		while(true)
 		{
 			Screen::reset();
-			drawSubMenu(Screen::SCREEN_WIDTH / 2 - menu_width / 2, 1, menu_width, menu_height, option_cursor_positon);
+			drawSubMenu(Screen::SCREEN_WIDTH / 2 - menu_width / 2, 0, menu_width, menu_height, option_cursor_positon);
 			Screen::print();
 
 			Input::updateKeyboard();
 			if(Input::isDown(S))
 			{
-				if(option_cursor_positon < MAX_SUBMENUOPTIONS - 1)
+				if (option_cursor_positon < MAX_SUBMENUOPTIONS - 1)
 					++option_cursor_positon;
+				else
+					option_cursor_positon = 0;
 			}
 			if(Input::isDown(W))
 			{
-				if(option_cursor_positon > 0)
+				if (option_cursor_positon > 0)
 					--option_cursor_positon;
+				else
+					option_cursor_positon = MAX_SUBMENUOPTIONS - 1;
 			}
 
 			if(Input::isDown(ENTER))

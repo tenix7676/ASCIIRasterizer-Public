@@ -63,7 +63,7 @@ namespace Input
 		double d;
 		do
 		{
-			std::cin.clear(); std::cin.ignore(512, '\n');
+			std::cin.clear(); std::cin.ignore(5120, '\n');
 			Screen::reset();
 			Screen::print();
 			Screen::moveCursorTo00();
@@ -72,7 +72,7 @@ namespace Input
 
 			cin >> d;
 		} while(std::cin.fail());
-		std::cin.clear(); std::cin.ignore(512, '\n');
+		std::cin.clear(); std::cin.ignore(5120, '\n');
 
 		return d;
 	}
@@ -80,7 +80,7 @@ namespace Input
 	{
 		do
 		{
-			std::cin.clear(); std::cin.ignore(512, '\n');
+			std::cin.clear(); std::cin.ignore(5120, '\n');
 			Screen::reset();
 			Screen::print();
 			Screen::moveCursorTo00();
@@ -89,7 +89,7 @@ namespace Input
 
 			cin >> d1 >> d2 >> d3;
 		} while(std::cin.fail());
-		std::cin.clear(); std::cin.ignore(512, '\n');
+		std::cin.clear(); std::cin.ignore(5120, '\n');
 	}
 
 }//end of namespace

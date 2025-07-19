@@ -18,33 +18,55 @@ namespace Rasterizer
 {
 	const char POINT_CHAR{ '&' };
 
-	int getScreenX(const Vector_3d& camera, const Vector_3d& camera_direction, double viewport_distance, const Vector_3d& point)
+	int getScreenX(const Vector_3d& camera, double viewport_distance, const Vector_3d& point, bool& too_close)
 	{
-		double view_pos_x = (point.y - camera.y) / (point.x - camera.x) * (viewport_distance - camera.x) + camera.y;
+		if (point.x - camera.x <= viewport_distance)
+		{
+			too_close = true;
+			return -1;
+		}
+
+		double view_pos_x = (point.y - camera.y) / (point.x - camera.x) * (viewport_distance);
 		int screen_pos_x = view_pos_x * SCREEN_WIDTH / VIEW_WIDTH;
 
 		return screen_pos_x + SCREEN_WIDTH / 2;
+
 	}
 
-	int getScreenY(const Vector_3d& camera, const Vector_3d& camera_direction, double viewport_distance, const Vector_3d& point)
+	int getScreenY(const Vector_3d& camera, double viewport_distance, const Vector_3d& point, bool& too_close)
 	{
-		double view_pos_y = (point.z - camera.z) / (point.x - camera.x) * (viewport_distance - camera.x) + camera.z;
+		if (point.x - camera.x <= viewport_distance)
+		{
+			too_close = true;
+			return -1;
+		}
+
+		double view_pos_y = (point.z - camera.z) / (point.x - camera.x) * (viewport_distance);
 		int screen_pos_y = view_pos_y * SCREEN_HEIGHT / VIEW_HEIGHT;
 
 		return -(screen_pos_y - SCREEN_HEIGHT / 2);
 	}
-	void drawWireframe(vector<pair<Vector_3d, Vector_3d>> wireframe_to_draw, const Vector_3d& camera, const Vector_3d& camera_direction, double viewport_distance)
+	void drawWireframe(vector<pair<Vector_3d, Vector_3d>> wireframe_to_draw, const Vector_3d& camera, double viewport_distance)
 	{
 		for(const auto& line : wireframe_to_draw)
 		{
-			int x0 = getScreenX(camera, camera_direction, viewport_distance, line.first);
-			int y0 = getScreenY(camera, camera_direction, viewport_distance, line.first);
-			int x1 = getScreenX(camera, camera_direction, viewport_distance, line.second);
-			int y1 = getScreenY(camera, camera_direction, viewport_distance, line.second);
+			bool point0_too_close = false;
+			int x0 = getScreenX(camera, viewport_distance, line.first, point0_too_close);
+			int y0 = getScreenY(camera, viewport_distance, line.first, point0_too_close);
+			bool point1_too_close = false;
+			int x1 = getScreenX(camera, viewport_distance, line.second, point1_too_close);
+			int y1 = getScreenY(camera, viewport_distance, line.second, point1_too_close);
 
-			Screen::drawLine(x0, y0, x1, y1);
-			Screen::draw(x0, y0, POINT_CHAR);
-			Screen::draw(x1, y1, POINT_CHAR);
+			if(!point0_too_close and !point1_too_close)
+			{
+				Screen::drawLine(x0, y0, x1, y1);
+				Screen::draw(x0, y0, POINT_CHAR);
+				Screen::draw(x1, y1, POINT_CHAR);
+			}
+			else
+			{
+				Screen::warningTooClose();
+			}
 		}
 	}
 }
@@ -153,6 +175,11 @@ void Wireframe::turnZ(double angle_z_axis)
 void Wireframe::moveByVector(Vector_3d vector)
 {
 	center += vector;
+}
+
+Vector_3d Wireframe::getPos()
+{
+	return center;
 }
 
 void Wireframe::setPos(Vector_3d pos)

@@ -25,6 +25,7 @@ public:
 	double getAngleZ() { return angle_z; }
 
 	void moveByVector(Vector_3d vector);
+	Vector_3d getPos();
 	void setPos(Vector_3d pos);
 	void setAngleX(double angle_x);
 	void setAngleZ(double angle_x);
@@ -36,8 +37,8 @@ public:
 
 namespace Rasterizer
 {
-	int getScreenX(const Vector_3d& camera, const Vector_3d& camera_direction, double viewport_distance, const Vector_3d& point);
-	int getScreenY(const Vector_3d& camera, const Vector_3d& camera_direction, double viewport_distance, const Vector_3d& point);
-	void drawWireframe(std::vector<std::pair<Vector_3d, Vector_3d>> wireframe_to_draw, const Vector_3d& camera, const Vector_3d& camera_direction, double viewport_distance);
+	int getScreenX(const Vector_3d& camera, double viewport_distance, const Vector_3d& point);
+	int getScreenY(const Vector_3d& camera, double viewport_distance, const Vector_3d& point);
+	void drawWireframe(std::vector<std::pair<Vector_3d, Vector_3d>> wireframe_to_draw, const Vector_3d& camera, double viewport_distance);
 	//void moveCube(std::vector<std::pair<Vector_3d, Vector_3d>>& cube, const Vector_3d& move);
 }

@@ -182,11 +182,11 @@ namespace Screen
 	{
 		DrawLineASCII::drawLineVerticalSpecificChar(x0, y0, height, c);
 	}
-	void writeOneLineString(int x0, int y0, string s)
-	{
-		for(int x{ 0 }; x < s.size(); ++x)
-			draw(x0 + x, y0, s[x]);
-	}
+	//void writeOneLineString(int x0, int y0, string s)
+	//{
+	//	for(int x{ 0 }; x < s.size(); ++x)
+	//		draw(x0 + x, y0, s[x]);
+	//}
 	void writeStringOneLine(int x0, int y0, string s)
 	{
 		for(int x{ 0 }; x < s.size(); ++x)
@@ -211,6 +211,11 @@ namespace Screen
 	void writeStringOneLineCenteredHighlighted(int x0, int y0, std::string s)
 	{
 		writeStringOneLineHighlighted(x0 - s.size() / 2, y0, s);
+	}
+
+	void warningTooClose()
+	{
+		writeStringOneLine(0, 0, "Warning: Points too close to viewport!");
 	}
 
 
