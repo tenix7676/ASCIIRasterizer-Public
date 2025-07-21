@@ -1,3 +1,5 @@
+## A library for drawing lines using ASCII characters and a simple rasterizer
+
 ## Windows
 Open the `.sln` file
 ## Linux
