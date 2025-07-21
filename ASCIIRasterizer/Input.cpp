@@ -32,10 +32,10 @@ namespace Input
 		keyboardprevious[D] = keyboardnow[D];
 
 		keyboardnow[ENTER] = (GetAsyncKeyState(VK_RETURN) & 0x8000) != 0;
-		keyboardnow[W] = (GetAsyncKeyState(0x57) & 0x8000) != 0 or (GetAsyncKeyState(VK_UP) & 0x8000) != 0;
-		keyboardnow[A] = (GetAsyncKeyState(0x41) & 0x8000) != 0 or (GetAsyncKeyState(VK_LEFT) & 0x8000) != 0;
-		keyboardnow[S] = (GetAsyncKeyState(0x53) & 0x8000) != 0 or (GetAsyncKeyState(VK_DOWN) & 0x8000) != 0;
-		keyboardnow[D] = (GetAsyncKeyState(0x44) & 0x8000) != 0 or (GetAsyncKeyState(VK_RIGHT) & 0x8000) != 0;
+		keyboardnow[W] = (GetAsyncKeyState(0x57) & 0x8000) != 0 || (GetAsyncKeyState(VK_UP) & 0x8000) != 0 || (GetAsyncKeyState(0x4B) & 0x8000) != 0;
+keyboardnow[A] = (GetAsyncKeyState(0x41) & 0x8000) != 0 || (GetAsyncKeyState(VK_LEFT) & 0x8000) != 0 || (GetAsyncKeyState(0x48) & 0x8000) != 0;
+keyboardnow[S] = (GetAsyncKeyState(0x53) & 0x8000) != 0 || (GetAsyncKeyState(VK_DOWN) & 0x8000) != 0 || (GetAsyncKeyState(0x4A) & 0x8000) != 0;
+keyboardnow[D] = (GetAsyncKeyState(0x44) & 0x8000) != 0 || (GetAsyncKeyState(VK_RIGHT) & 0x8000) != 0 || (GetAsyncKeyState(0x4C) & 0x8000) != 0;
 	}
 
 	bool isPressed(KeyType key)
