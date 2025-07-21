@@ -479,5 +479,7 @@ void openMenuAndRunOption()
 int main()
 {
 	this_thread::sleep_for(seconds(1)); //add a delay, so enter isnt detected immediately after running
+	Input::init();
 	openMenuAndRunOption();
+	Input::close();
 }

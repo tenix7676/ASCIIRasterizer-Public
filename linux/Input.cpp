@@ -14,6 +14,7 @@ namespace Input
 {
 	bool keyboardprevious[MAX_KEYS]{};
 	bool keyboardnow[MAX_KEYS]{};
+	Display* d = nullptr;
 
 
 	//void resetButtonStates(bool keyboard[MAX_KEYS])
@@ -33,9 +34,16 @@ namespace Input
 	
 	    return (keys_return[keycode / 8] & (1 << (keycode % 8))) != 0;
 	}
+	void init()
+	{
+		d = XOpenDisplay(nullptr);
+	}
+	void close()
+	{
+		XCloseDisplay(d);
+	}
 	void updateKeyboard()
 	{
-		Display* d = XOpenDisplay(nullptr);
 		keyboardprevious[ENTER] = keyboardnow[ENTER];
 		keyboardprevious[W] = keyboardnow[W];
 		keyboardprevious[A] = keyboardnow[A];
@@ -46,18 +54,16 @@ namespace Input
 		keyboardnow[ENTER] = isKeyPressed(d, XK_Return);
 	
 		// W: W key or Up arrow
-		keyboardnow[W] = isKeyPressed(d, XK_w) || isKeyPressed(d, XK_Up);
+		keyboardnow[W] = isKeyPressed(d, XK_k) || isKeyPressed(d, XK_w) || isKeyPressed(d, XK_Up);
 		
 		// A: A key or Left arrow
-		keyboardnow[A] = isKeyPressed(d, XK_a) || isKeyPressed(d, XK_Left);
+		keyboardnow[A] = isKeyPressed(d, XK_h) || isKeyPressed(d, XK_a) || isKeyPressed(d, XK_Left);
 		
 		// S: S key or Down arrow
-		keyboardnow[S] = isKeyPressed(d, XK_s) || isKeyPressed(d, XK_Down);
+		keyboardnow[S] = isKeyPressed(d, XK_j) || isKeyPressed(d, XK_s) || isKeyPressed(d, XK_Down);
 		
 		// D: D key or Right arrow
-		keyboardnow[D] = isKeyPressed(d, XK_d) || isKeyPressed(d, XK_Right);
-
-		XCloseDisplay(d);
+		keyboardnow[D] = isKeyPressed(d, XK_l) || isKeyPressed(d, XK_d) || isKeyPressed(d, XK_Right);
 	}
 
 	bool isPressed(KeyType key)

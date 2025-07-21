@@ -30,12 +30,12 @@ namespace Menu
 
 
 
-	const char LINE_HORIZONTAL = '─';
-	const char LINE_VERTICAL = '│'; 
-	const char UPPER_LEFT_CORNER = '┌';
-	const char UPPER_RIGHT_CORNER = '┐';
-	const char LOWER_LEFT_CORNER = '└';
-	const char LOWER_RIGHT_CORNER = '┘';
+	const char LINE_HORIZONTAL = '-';
+	const char LINE_VERTICAL = '|'; 
+	const char UPPER_LEFT_CORNER = '+';
+	const char UPPER_RIGHT_CORNER = '+';
+	const char LOWER_LEFT_CORNER = '+';
+	const char LOWER_RIGHT_CORNER = '+';
 
 	void drawBoxedList(int menu_x, int menu_y, int menu_width, int menu_height, int option_cursor_positon, string* list, int list_length)
 	{

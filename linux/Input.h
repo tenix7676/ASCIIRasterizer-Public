@@ -14,6 +14,8 @@ enum KeyType
 
 namespace Input
 {
+	void init();
+	void close();
 	void updateKeyboard();
 	bool isDown(KeyType key);
 	bool isHeld(KeyType key);
