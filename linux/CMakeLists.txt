@@ -11,4 +11,4 @@ find_package(X11 REQUIRED)
 file(GLOB ASCIIRasterizer_SRC CONFIGURE_DEPENDS "*.h" "*.cpp")
 add_executable(ASCIIRasterizer ${ASCIIRasterizer_SRC})
 
-target_link_libraries(ASCIIRasterizer PRIVATE X11::X11 ncurses)
+target_link_libraries(ASCIIRasterizer PRIVATE X11::X11)

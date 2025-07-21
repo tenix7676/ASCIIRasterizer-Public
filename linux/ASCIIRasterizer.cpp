@@ -4,7 +4,7 @@
 #include <sstream>
 //#include <Windows.h>
 //#include <conio.h>
-#include <curses.h>
+//#include <curses.h>
 #include <chrono>
 #include <thread>
 using namespace std::chrono;
