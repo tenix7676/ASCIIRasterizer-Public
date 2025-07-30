@@ -14,4 +14,4 @@ sudo apt install libx11-dev
 
 Go into `build/` and run cmake and make `cmake ../linux; make`
 
-[ASCIRasterizer.mp4](ASCIRasterizer.mp4)
+[ASCIIRasterizer.mp4](./ASCIIRasterizer.mp4)
